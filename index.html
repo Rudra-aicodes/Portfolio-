@@ -1,117 +1,591 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Rudra Ojha — BCA Cyber Security student at Sangam University, learning cybersecurity, Linux, networking and Python." />
-  <meta name="keywords" content="Rudra Ojha, cybersecurity student, BCA Cyber Security, Sangam University, Python, Linux, networking" />
-  <meta name="author" content="Rudra Ojha" />
-  <meta name="theme-color" content="#080d12" />
-  <title>Rudra Ojha | Cyber Security Student</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Rudra Ojha, BCA Cyber Security student at Sangam University, learning cybersecurity, Linux, networking and Python.">
+<meta name="theme-color" content="#0b0716">
+<title>Rudra Ojha | Cyber Security Student</title>
+<style>
+  :root {
+    --bg: #0b0716;
+    --panel: #151029;
+    --panel-2: #1d1638;
+    --text: #f1eeff;
+    --muted: #a9a3c7;
+    --pink: #ff4d9d;
+    --orange: #ff9f43;
+    --yellow: #ffd93d;
+    --green: #39f0a0;
+    --cyan: #3ddcff;
+    --violet: #9b6bff;
+    --grad: linear-gradient(135deg, #ff4d9d, #9b6bff 50%, #3ddcff);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(255,77,157,.18), transparent 40%),
+      radial-gradient(circle at 90% 30%, rgba(61,220,255,.14), transparent 40%),
+      var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  a { color: var(--cyan); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  section { padding: 80px 6vw; max-width: 1100px; margin: 0 auto; }
+  h1, h2, h3 { line-height: 1.2; }
+  .gradient-text {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .eyebrow {
+    font-family: Consolas, monospace;
+    color: var(--yellow);
+    font-size: .9rem;
+    letter-spacing: .08em;
+  }
+  .section-title { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 8px 0 14px; }
+  .section-intro { color: var(--muted); max-width: 640px; margin-bottom: 36px; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 6vw;
+    background: rgba(11,7,22,.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    flex-wrap: wrap; gap: 10px;
+  }
+  .logo { font-family: Consolas, monospace; font-weight: 700; font-size: 1.1rem; }
+  nav ul { list-style: none; display: flex; gap: 18px; flex-wrap: wrap; }
+  nav a { color: var(--text); font-size: .95rem; }
+  nav a:hover { color: var(--pink); text-decoration: none; }
+
+  /* HERO */
+  .hero {
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 50px;
+    align-items: center; min-height: 85vh;
+  }
+  .badge {
+    display: inline-block; padding: 6px 14px; border-radius: 999px;
+    background: rgba(57,240,160,.12); color: var(--green);
+    font-size: .85rem; border: 1px solid rgba(57,240,160,.4);
+    margin-bottom: 18px;
+  }
+  .hero h1 { font-size: clamp(2.4rem, 6vw, 4rem); }
+  .hero h2 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--orange); margin: 8px 0 16px; }
+  .hero p.lead { color: var(--muted); font-size: 1.05rem; max-width: 560px; }
+  .tags { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 26px; }
+  .tag {
+    padding: 6px 12px; border-radius: 8px; font-size: .85rem;
+    background: var(--panel-2); border: 1px solid rgba(255,255,255,.08);
+  }
+  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    padding: 12px 22px; border-radius: 10px; font-weight: 600;
+    border: none; cursor: pointer; font-size: .95rem; color: #fff;
+    background: var(--grad); transition: transform .2s, box-shadow .2s;
+    display: inline-block;
+  }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255,77,157,.35); text-decoration: none; }
+  .btn.ghost { background: transparent; border: 2px solid var(--violet); }
+
+  .avatar-wrap { position: relative; justify-self: center; }
+  .avatar {
+    width: min(340px, 80vw); aspect-ratio: 1; border-radius: 28px;
+    background: var(--grad); padding: 4px; cursor: zoom-in;
+    transition: transform .3s; position: relative;
+  }
+  .avatar:hover { transform: rotate(-2deg) scale(1.02); }
+  .avatar img, .avatar .fallback {
+    width: 100%; height: 100%; border-radius: 24px; object-fit: cover;
+    display: block; background: var(--panel);
+  }
+  .avatar .fallback {
+    display: none; align-items: center; justify-content: center;
+    font-size: 5rem; font-weight: 800; color: var(--pink);
+  }
+  .avatar-hint {
+    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+    background: rgba(11,7,22,.8); padding: 4px 12px; border-radius: 999px;
+    font-size: .8rem; white-space: nowrap; color: var(--yellow);
+  }
+  .sticker {
+    position: absolute; top: -14px; right: -14px; background: var(--yellow);
+    color: #111; font-weight: 800; padding: 10px 14px; border-radius: 14px;
+    transform: rotate(8deg); font-size: .85rem; box-shadow: 0 6px 18px rgba(0,0,0,.4);
+  }
+
+  /* CARDS */
+  .grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card {
+    position: relative; overflow: hidden;
+    background: var(--panel); border: 1px solid rgba(255,255,255,.07);
+    border-radius: 18px; padding: 26px; cursor: pointer;
+    transition: transform .25s, border-color .25s, box-shadow .25s;
+    text-align: left; color: var(--text); font: inherit; width: 100%;
+  }
+  .card::before {
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
+    background: var(--accent, var(--grad));
+  }
+  .card:hover, .card:focus-visible {
+    transform: translateY(-6px);
+    border-color: var(--accent, var(--pink));
+    box-shadow: 0 16px 40px rgba(0,0,0,.4);
+    outline: none;
+  }
+  .card .icon {
+    width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
+    font-size: 1.5rem; background: color-mix(in srgb, var(--accent, var(--pink)) 20%, transparent);
+    margin-bottom: 14px;
+  }
+  .card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: .95rem; }
+  .card .more { display: inline-block; margin-top: 14px; font-size: .85rem; color: var(--accent, var(--pink)); font-weight: 600; }
+  .pill {
+    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .05em;
+    padding: 4px 10px; border-radius: 999px; margin-top: 12px;
+    background: color-mix(in srgb, var(--accent, var(--green)) 18%, transparent);
+    color: var(--accent, var(--green));
+  }
+
+  /* ABOUT */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .stat {
+    text-align: center; padding: 22px; border-radius: 16px;
+    background: var(--panel-2); border-bottom: 3px solid var(--accent);
+  }
+  .stat .num { font-size: 2rem; font-weight: 800; color: var(--accent); }
+  .stat .label { color: var(--muted); font-size: .85rem; }
+
+  /* SKILLS */
+  .skill { --accent: var(--cyan); }
+  .skill-bar { height: 8px; background: rgba(255,255,255,.08); border-radius: 999px; margin-top: 14px; overflow: hidden; }
+  .skill-bar span { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+
+  /* PROJECTS */
+  .project { --accent: var(--orange); }
+  .project:nth-child(2) { --accent: var(--pink); }
+  .project:nth-child(3) { --accent: var(--green); }
+
+  /* JOURNEY */
+  .timeline { position: relative; padding-left: 30px; }
+  .timeline::before {
+    content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 3px; background: var(--grad);
+    border-radius: 3px;
+  }
+  .step { position: relative; margin-bottom: 26px; cursor: pointer; }
+  .step::before {
+    content: ""; position: absolute; left: -28px; top: 22px; width: 16px; height: 16px;
+    border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--bg);
+  }
+  .step .card { padding: 22px; }
+  .step .years { font-family: Consolas, monospace; color: var(--accent); font-size: .85rem; font-weight: 700; }
+
+  /* CONTACT */
+  .contact-box {
+    text-align: center; padding: 50px 30px; border-radius: 24px;
+    background: linear-gradient(135deg, rgba(255,77,157,.15), rgba(61,220,255,.12));
+    border: 1px solid rgba(255,255,255,.08);
+  }
+  .contact-box p { color: var(--muted); margin: 10px auto 26px; max-width: 520px; }
+  .email { display: inline-block; margin-top: 22px; font-weight: 600; color: var(--yellow); }
+
+  footer { text-align: center; padding: 30px; color: var(--muted); font-size: .85rem; border-top: 1px solid rgba(255,255,255,.06); }
+
+  /* MODALS */
+  dialog {
+    width: min(620px, 92vw); max-height: 88vh; border: none; border-radius: 22px;
+    background: var(--panel); color: var(--text); padding: 0; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,.6);
+  }
+  dialog::backdrop { background: rgba(5,3,12,.75); backdrop-filter: blur(4px); }
+  dialog[open] { animation: pop .3s ease; }
+  @keyframes pop { from { transform: scale(.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal-head { height: 8px; background: var(--accent, var(--grad)); }
+  .modal-body { padding: 28px 30px 32px; overflow-y: auto; max-height: calc(88vh - 8px); }
+  .modal-body h2 { font-size: 1.6rem; margin: 6px 0 10px; }
+  .modal-body h3 { font-size: 1rem; color: var(--accent, var(--pink)); margin: 20px 0 8px; }
+  .modal-body p, .modal-body li { color: #d8d3ee; font-size: .98rem; }
+  .modal-body ul { padding-left: 20px; }
+  .modal-body li { margin-bottom: 6px; }
+  .close {
+    position: absolute; top: 18px; right: 18px; width: 38px; height: 38px; border-radius: 50%;
+    border: none; background: rgba(255,255,255,.1); color: #fff; font-size: 1.3rem; cursor: pointer;
+  }
+  .close:hover { background: var(--pink); }
+  dialog.photo { width: auto; max-width: 92vw; background: transparent; }
+  dialog.photo img { max-width: 88vw; max-height: 85vh; border-radius: 22px; display: block; }
+  dialog.photo .caption {
+    text-align: center; margin-top: 12px; color: var(--yellow); font-family: Consolas, monospace;
+  }
+  .lightbox-btn { background: var(--grad); }
+
+  @media (max-width: 800px) {
+    .hero { grid-template-columns: 1fr; text-align: center; min-height: auto; padding-top: 30px; }
+    .hero p.lead { margin: 0 auto; }
+    .tags, .btn-row { justify-content: center; }
+    .avatar-wrap { order: -1; }
+    section { padding: 60px 5vw; }
+    nav ul { gap: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
 </head>
 <body>
-  <div class="background-grid" aria-hidden="true"></div>
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="Rudra Ojha home"><span class="brand-mark">R</span><span>rudra<span class="accent">.sec</span></span></a>
-    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-    <nav class="nav" id="nav">
-      <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#journey">Journey</a><a class="nav-contact" href="#contact">Contact ↗</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="hero section-wrap" id="home">
-      <div class="hero-copy">
-        <div class="status-pill"><span class="pulse"></span> OPEN TO LEARNING & COLLABORATION</div>
-        <p class="eyebrow">HELLO, WORLD. I'M</p>
-        <h1>Rudra <span class="accent">Ojha</span><span class="cursor">_</span></h1>
-        <h2>BCA Cyber Security <span class="muted">Student</span></h2>
-        <p class="hero-description">Learning to understand systems, explore security, and help build a safer digital world — one practical step at a time.</p>
-        <div class="hero-meta"><span>⌖ Sangam University</span><span>▣ Batch 2026–2029</span></div>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#projects">Explore my work <span>↘</span></a>
-          <a class="button button-secondary" href="https://github.com/Rudr-python-git" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-        </div>
-        <div class="social-row">
-          <a href="https://www.linkedin.com/in/rudra-ojha-55b4972b1" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-          <span class="separator">/</span>
-          <a href="https://github.com/Rudr-python-git" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-        </div>
+<nav>
+  <div class="logo gradient-text">Rrudra.sec</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home" style="max-width:1200px">
+  <div>
+    <span class="badge">● Open to learning & collaboration</span>
+    <p class="eyebrow">Hello, world. I'm</p>
+    <h1><span class="gradient-text">Rudra Ojha</span></h1>
+    <h2>BCA Cyber Security Student</h2>
+    <p class="lead">Learning to understand systems, explore security, and help build a safer digital world, one practical step at a time.</p>
+    <div class="tags">
+      <span class="tag">📍 Sangam University</span>
+      <span class="tag">🎓 Batch 2026–2029</span>
+      <span class="tag">🐧 Linux</span>
+      <span class="tag">🐍 Python</span>
+    </div>
+    <div class="btn-row">
+      <a class="btn" href="#projects">Explore my work ↘</a>
+      <a class="btn ghost" href="https://github.com/Rudr-python-git" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+
+  <div class="avatar-wrap">
+    <div class="sticker">Hi! 👋</div>
+    <div class="avatar" id="avatar" role="button" tabindex="0" aria-label="View photo of Rudra Ojha">
+      <img src="photo.jpg" alt="Photo of Rudra Ojha"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback">RO</div>
+    </div>
+    <span class="avatar-hint">Tap photo to enlarge 📸</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="eyebrow">01 / ABOUT ME</p>
+  <h2 class="section-title">Curious mind. <span class="gradient-text">Security-first mindset.</span></h2>
+  <p class="section-intro">I'm at the beginning of my cybersecurity journey, building strong foundations and turning what I learn into practical work.</p>
+
+  <div class="stats">
+    <div class="stat" style="--accent: var(--pink)"><div class="num">2026</div><div class="label">Started BCA</div></div>
+    <div class="stat" style="--accent: var(--cyan)"><div class="num">4</div><div class="label">Core areas</div></div>
+    <div class="stat" style="--accent: var(--green)"><div class="num">3</div><div class="label">Labs in progress</div></div>
+    <div class="stat" style="--accent: var(--yellow)"><div class="num">∞</div><div class="label">Curiosity</div></div>
+  </div>
+
+  <div class="grid">
+    <button class="card" style="--accent: var(--pink)" data-modal="about-who">
+      <div class="icon">🙋</div>
+      <h3>Who I am</h3>
+      <p>BCA Cyber Security student at Sangam University (2026–2029), interested in how digital systems work and how they fail.</p>
+      <span class="more">Read more →</span>
+    </button>
+    <button class="card" style="--accent: var(--cyan)" data-modal="about-goal">
+      <div class="icon">🎯</div>
+      <h3>My goal</h3>
+      <p>Strengthen my fundamentals in operating systems, networking, programming and defensive security.</p>
+      <span class="more">Read more →</span>
+    </button>
+    <button class="card" style="--accent: var(--green)" data-modal="about-focus">
+      <div class="icon">🧭</div>
+      <h3>Current focus</h3>
+      <p>Linux confidence, networking basics, Python practice, and documenting labs responsibly.</p>
+      <span class="more">Read more →</span>
+    </button>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="eyebrow">02 / TECH STACK</p>
+  <h2 class="section-title">Skills I'm <span class="gradient-text">building.</span></h2>
+  <p class="section-intro">A learning roadmap, not a claim of expertise. Tap any skill to see what I'm working on.</p>
+
+  <div class="grid">
+    <button class="card skill" style="--accent: var(--pink)" data-modal="skill-security">
+      <div class="icon">🛡️</div>
+      <h3>Cybersecurity</h3>
+      <p>Security fundamentals · Ethical hacking concepts · Vulnerability awareness</p>
+      <div class="skill-bar"><span style="width:25%"></span></div>
+      <span class="pill">LEARNING</span>
+    </button>
+    <button class="card skill" style="--accent: var(--green)" data-modal="skill-linux">
+      <div class="icon">🐧</div>
+      <h3>Systems & Linux</h3>
+      <p>Linux basics · Command line · Operating-system fundamentals</p>
+      <div class="skill-bar"><span style="width:40%"></span></div>
+      <span class="pill">LEARNING</span>
+    </button>
+    <button class="card skill" style="--accent: var(--cyan)" data-modal="skill-net">
+      <div class="icon">🌐</div>
+      <h3>Networking</h3>
+      <p>TCP/IP · DNS · HTTP/HTTPS · Network fundamentals</p>
+      <div class="skill-bar"><span style="width:30%"></span></div>
+      <span class="pill">LEARNING</span>
+    </button>
+    <button class="card skill" style="--accent: var(--yellow)" data-modal="skill-py">
+      <div class="icon">🐍</div>
+      <h3>Programming</h3>
+      <p>Python basics · Problem solving · Scripting fundamentals</p>
+      <div class="skill-bar"><span style="width:45%"></span></div>
+      <span class="pill">LEARNING</span>
+    </button>
+    <button class="card skill" style="--accent: var(--violet)" data-modal="skill-web">
+      <div class="icon">🧩</div>
+      <h3>Web Fundamentals</h3>
+      <p>HTML · CSS · How websites and web requests work</p>
+      <div class="skill-bar"><span style="width:35%"></span></div>
+      <span class="pill">LEARNING</span>
+    </button>
+    <button class="card skill" style="--accent: var(--orange)" data-modal="skill-tools">
+      <div class="icon">🛠️</div>
+      <h3>Tools & Workflow</h3>
+      <p>Git · GitHub · Technical notes · Project documentation</p>
+      <div class="skill-bar"><span style="width:40%"></span></div>
+      <span class="pill">LEARNING</span>
+    </button>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="eyebrow">03 / PROJECTS & LABS</p>
+  <h2 class="section-title">Learning <span class="gradient-text">by doing.</span></h2>
+  <p class="section-intro">Project cards are starter placeholders. Replace them with real work as each project is completed.</p>
+
+  <div class="grid">
+    <button class="card project" data-modal="proj-1">
+      <div class="icon">🧰</div>
+      <h3>PROJECT_01 · Python Security Toolkit</h3>
+      <p>A beginner-friendly collection of Python scripts for safe, local learning and automation.</p>
+      <span class="pill">PLANNED</span>
+    </button>
+    <button class="card project" data-modal="proj-2">
+      <div class="icon">🖧</div>
+      <h3>PROJECT_02 · Networking Fundamentals Lab</h3>
+      <p>Document networking concepts, commands, diagrams and observations from a personal lab.</p>
+      <span class="pill">PLANNED</span>
+    </button>
+    <button class="card project" data-modal="proj-3">
+      <div class="icon">📚</div>
+      <h3>PROJECT_03 · Cybersecurity Learning Notes</h3>
+      <p>Organised notes and write-ups from beginner labs, with clear scope and ethical practice.</p>
+      <span class="pill">IN PROGRESS</span>
+    </button>
+  </div>
+  <p style="margin-top:24px;color:var(--yellow);font-size:.9rem">⚠️ Security testing should only be performed on systems you own or have explicit permission to test.</p>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <p class="eyebrow">04 / MY JOURNEY</p>
+  <h2 class="section-title">The foundation <span class="gradient-text">starts here.</span></h2>
+  <p class="section-intro">A simple roadmap for my BCA years. Tap a phase to see the milestones.</p>
+
+  <div class="timeline">
+    <div class="step" style="--accent: var(--pink)" data-modal="jour-1">
+      <div class="card" style="--accent: var(--pink)">
+        <div class="years">2026 — 2027 · CURRENT PHASE</div>
+        <h3>Build the fundamentals</h3>
+        <p>BCA studies, Linux, networking, Python, Git, and beginner-friendly labs.</p>
       </div>
-      <div class="hero-visual" aria-label="Decorative cybersecurity terminal illustration">
-        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-        <div class="terminal">
-          <div class="terminal-top"><div class="dots"><i></i><i></i><i></i></div><span>rudra@portfolio:~</span><span class="terminal-lock">▣</span></div>
-          <div class="terminal-body">
-            <p><span class="term-green">rudra@sec</span>:<span class="term-blue">~</span>$ whoami</p>
-            <p class="term-output">bca-cyber-security-student</p>
-            <p><span class="term-green">rudra@sec</span>:<span class="term-blue">~</span>$ cat focus.txt</p>
-            <p class="term-output">curiosity = "always_on"</p>
-            <p class="term-output">learning = ["Linux", "Python",</p>
-            <p class="term-output indent">"Networking", "Security"]</p>
-            <p><span class="term-green">rudra@sec</span>:<span class="term-blue">~</span>$ <span class="blink">▋</span></p>
-          </div>
-          <div class="terminal-footer"><span><i class="mini-dot"></i> SYSTEM ONLINE</span><span>SECURITY MODE: LEARN</span></div>
-        </div>
-        <div class="floating-tag tag-top">⌘ &nbsp; THINK · TEST · LEARN</div>
-        <div class="floating-tag tag-bottom"><span class="shield">⬡</span> ETHICAL BY DESIGN</div>
+    </div>
+    <div class="step" style="--accent: var(--cyan)" data-modal="jour-2">
+      <div class="card" style="--accent: var(--cyan)">
+        <div class="years">2027 — 2028 · UP NEXT</div>
+        <h3>Practise & specialise</h3>
+        <p>Develop projects, explore defensive and web security, and document hands-on learning.</p>
       </div>
-      <div class="scroll-hint"><span></span> SCROLL TO EXPLORE</div>
-    </section>
-
-    <section class="section-wrap section" id="about">
-      <div class="section-label"><span>01</span> / ABOUT ME</div>
-      <div class="section-heading-row"><h2>Curious mind.<br><span class="muted">Security-first mindset.</span></h2><p class="section-intro">I’m at the beginning of my cybersecurity journey, building strong foundations and turning what I learn into practical work.</p></div>
-      <div class="about-grid">
-        <article class="info-card about-card"><div class="card-icon">⌁</div><h3>A little about me</h3><p>I’m Rudra Ojha, a BCA Cyber Security student at Sangam University (2026–2029). I’m interested in how digital systems work, how vulnerabilities happen, and how security-minded people can help protect them.</p><p>My current goal is to strengthen my fundamentals in operating systems, networking, programming, and defensive security while documenting my learning journey.</p></article>
-        <article class="info-card focus-card"><div class="card-icon">◎</div><h3>Current focus</h3><ul class="check-list"><li>Building Linux and command-line confidence</li><li>Learning networking and security basics</li><li>Practising Python programming</li><li>Documenting labs and projects responsibly</li></ul></article>
+    </div>
+    <div class="step" style="--accent: var(--green)" data-modal="jour-3">
+      <div class="card" style="--accent: var(--green)">
+        <div class="years">2028 — 2029 · FUTURE GOAL</div>
+        <h3>Prepare for industry</h3>
+        <p>Build a strong portfolio, pursue relevant certifications, and prepare for internships or entry-level roles.</p>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section class="section-wrap section" id="skills">
-      <div class="section-label"><span>02</span> / TECH STACK</div>
-      <div class="section-heading-row"><h2>Skills I’m <span class="accent">building.</span></h2><p class="section-intro">A learning roadmap, not a claim of expertise. I’ll update this section as I gain hands-on experience.</p></div>
-      <div class="skills-grid">
-        <div class="skill-card"><span class="skill-symbol">⌘</span><h3>Cybersecurity</h3><p>Security fundamentals · Ethical hacking concepts · Vulnerability awareness</p><span class="skill-level">LEARNING</span></div>
-        <div class="skill-card"><span class="skill-symbol">$_</span><h3>Systems & Linux</h3><p>Linux basics · Command line · Operating-system fundamentals</p><span class="skill-level">LEARNING</span></div>
-        <div class="skill-card"><span class="skill-symbol">↔</span><h3>Networking</h3><p>TCP/IP · DNS · HTTP/HTTPS · Network fundamentals</p><span class="skill-level">LEARNING</span></div>
-        <div class="skill-card"><span class="skill-symbol">Py</span><h3>Programming</h3><p>Python basics · Problem solving · Scripting fundamentals</p><span class="skill-level">LEARNING</span></div>
-        <div class="skill-card"><span class="skill-symbol">⌗</span><h3>Web Fundamentals</h3><p>HTML · CSS · How websites and web requests work</p><span class="skill-level">LEARNING</span></div>
-        <div class="skill-card"><span class="skill-symbol">⑂</span><h3>Tools & Workflow</h3><p>Git · GitHub · Technical notes · Project documentation</p><span class="skill-level">LEARNING</span></div>
-      </div>
-    </section>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-box">
+    <p class="eyebrow">05 / GET IN TOUCH</p>
+    <h2 class="section-title">Let's <span class="gradient-text">connect.</span></h2>
+    <p>Interested in learning, collaborating on beginner-friendly projects, or sharing cybersecurity resources? Find me on my professional profiles.</p>
+    <div class="btn-row" style="justify-content:center">
+      <a class="btn" href="https://www.linkedin.com/in/rudra-ojha-55b4972b1" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn ghost" href="https://github.com/Rudr-python-git" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+    <a class="email" href="mailto:rudraojha3333@gmail.com">✉️ rudraojha3333@gmail.com</a>
+  </div>
+</section>
 
-    <section class="section-wrap section" id="projects">
-      <div class="section-label"><span>03</span> / PROJECTS & LABS</div>
-      <div class="section-heading-row"><h2>Learning by <span class="accent">doing.</span></h2><p class="section-intro">Project cards are starter placeholders. Replace them with your real work as you complete each project.</p></div>
-      <div class="projects-grid">
-        <article class="project-card"><div class="project-top"><span class="project-number">PROJECT_01</span><span class="project-icon">⌘</span></div><h3>Python Security Toolkit</h3><p>A beginner-friendly collection of Python scripts for safe, local learning and automation.</p><div class="tag-row"><span>Python</span><span>Automation</span></div><div class="project-status">PLANNED PROJECT</div></article>
-        <article class="project-card"><div class="project-top"><span class="project-number">PROJECT_02</span><span class="project-icon">⌁</span></div><h3>Networking Fundamentals Lab</h3><p>Document networking concepts, commands, diagrams, and observations from a personal lab.</p><div class="tag-row"><span>Networking</span><span>Linux</span></div><div class="project-status">PLANNED PROJECT</div></article>
-        <article class="project-card"><div class="project-top"><span class="project-number">PROJECT_03</span><span class="project-icon">⬡</span></div><h3>Cybersecurity Learning Notes</h3><p>Organised notes and write-ups from beginner labs, with clear scope and ethical practice.</p><div class="tag-row"><span>Documentation</span><span>Security</span></div><div class="project-status">IN PROGRESS WHEN YOU ADD WORK</div></article>
-      </div>
-      <p class="ethics-note"><span>ⓘ</span> Security testing should only be performed on systems you own or have explicit permission to test.</p>
-    </section>
+<footer>Designed with curiosity. Built for learning. © Rudra Ojha</footer>
 
-    <section class="section-wrap section" id="journey">
-      <div class="section-label"><span>04</span> / MY JOURNEY</div>
-      <div class="section-heading-row"><h2>The foundation <span class="muted">starts here.</span></h2><p class="section-intro">A simple roadmap for my BCA years. I’ll update milestones as I complete them.</p></div>
-      <div class="timeline">
-        <div class="timeline-item"><span class="timeline-date">2026 — 2027</span><div><h3>Build the fundamentals</h3><p>BCA studies, Linux, networking, Python, Git, and beginner-friendly labs.</p></div><span class="timeline-state">CURRENT PHASE</span></div>
-        <div class="timeline-item"><span class="timeline-date">2027 — 2028</span><div><h3>Practise & specialise</h3><p>Develop projects, explore defensive security and web security, and document hands-on learning.</p></div><span class="timeline-state">UP NEXT</span></div>
-        <div class="timeline-item"><span class="timeline-date">2028 — 2029</span><div><h3>Prepare for industry</h3><p>Build a strong project portfolio, pursue relevant certifications, and prepare for internships or entry-level roles.</p></div><span class="timeline-state">FUTURE GOAL</span></div>
-      </div>
-    </section>
+<!-- PHOTO LIGHTBOX -->
+<dialog class="photo" id="photo-dialog">
+  <button class="close" data-close aria-label="Close">×</button>
+  <img src="photo.jpg" alt="Rudra Ojha" onerror="this.onerror=null; this.src='';">
+  <p class="caption">Rudra Ojha · BCA Cyber Security · Sangam University</p>
+</dialog>
 
-    <section class="section-wrap contact-section" id="contact">
-      <div class="contact-panel"><div class="section-label"><span>05</span> / GET IN TOUCH</div><h2>Let’s connect<span class="accent">.</span></h2><p>Interested in learning, collaborating on beginner-friendly projects, or sharing cybersecurity resources? Find me on my professional profiles.</p><div class="contact-actions"><a class="button button-primary" href="https://www.linkedin.com/in/rudra-ojha-55b4972b1" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ↗</a><a class="button button-secondary" href="https://github.com/Rudr-python-git" target="_blank" rel="noopener noreferrer">Explore GitHub ↗</a></div><p class="email-line">Email: <a href="mailto:rudraojha3333@gmail.com">rudraojha3333@gmail.com</a></p></div>
-    </section>
-  </main>
+<!-- INFO MODAL -->
+<dialog id="info-dialog">
+  <div class="modal-head" id="info-head"></div>
+  <button class="close" data-close aria-label="Close">×</button>
+  <div class="modal-body" id="info-body"></div>
+</dialog>
 
-  <footer class="site-footer"><a class="brand" href="#home"><span class="brand-mark">R</span><span>rudra<span class="accent">.sec</span></span></a><p>Designed with curiosity. Built for learning.</p><span>© <span id="year"></span> Rudra Ojha</span></footer>
-  <script src="script.js"></script>
+<script>
+  const C = {
+    pink: "#ff4d9d", cyan: "#3ddcff", green: "#39f0a0",
+    yellow: "#ffd93d", orange: "#ff9f43", violet: "#9b6bff"
+  };
+
+  const info = {
+    "about-who": { color: C.pink, title: "Who I am", html: `
+      <p>I'm Rudra Ojha, a BCA Cyber Security student at Sangam University (2026–2029).</p>
+      <h3>What drives me</h3>
+      <ul>
+        <li>How digital systems actually work under the hood</li>
+        <li>How vulnerabilities happen and how to prevent them</li>
+        <li>Helping build a safer internet for everyone</li>
+      </ul>` },
+    "about-goal": { color: C.cyan, title: "My goal", html: `
+      <p>Build solid fundamentals first, then specialise.</p>
+      <h3>Focus areas</h3>
+      <ul>
+        <li>Operating systems</li>
+        <li>Networking</li>
+        <li>Programming with Python</li>
+        <li>Defensive security</li>
+      </ul>` },
+    "about-focus": { color: C.green, title: "Current focus", html: `
+      <ul>
+        <li>Building Linux and command-line confidence</li>
+        <li>Learning networking and security basics</li>
+        <li>Practising Python programming</li>
+        <li>Documenting labs and projects responsibly</li>
+      </ul>` },
+
+    "skill-security": { color: C.pink, title: "Cybersecurity", html: `
+      <p>Starting with the core ideas: CIA triad, common attack types, and defensive thinking.</p>
+      <h3>Topics</h3>
+      <ul><li>Security fundamentals</li><li>Ethical hacking concepts</li><li>Vulnerability awareness (OWASP Top 10)</li></ul>
+      <h3>Progress</h3><p>Beginner stage. Roughly 25% toward my first milestone.</p>` },
+    "skill-linux": { color: C.green, title: "Systems & Linux", html: `
+      <p>Getting comfortable with the terminal, file permissions, processes, and package management.</p>
+      <h3>Topics</h3>
+      <ul><li>Linux basics and navigation</li><li>Command line workflows</li><li>Operating-system fundamentals</li></ul>
+      <h3>Progress</h3><p>Building confidence. Roughly 40% toward my first milestone.</p>` },
+    "skill-net": { color: C.cyan, title: "Networking", html: `
+      <p>Understanding how data moves from one device to another.</p>
+      <h3>Topics</h3>
+      <ul><li>TCP/IP model</li><li>DNS resolution</li><li>HTTP and HTTPS</li></ul>
+      <h3>Progress</h3><p>Early learning. Roughly 30% toward my first milestone.</p>` },
+    "skill-py": { color: C.yellow, title: "Programming", html: `
+      <p>Using Python for scripting, automation and small security tools.</p>
+      <h3>Topics</h3>
+      <ul><li>Python basics</li><li>Problem solving</li><li>Scripting fundamentals</li></ul>
+      <h3>Progress</h3><p>Practising regularly. Roughly 45% toward my first milestone.</p>` },
+    "skill-web": { color: C.violet, title: "Web Fundamentals", html: `
+      <p>Knowing how websites are built and how requests travel between browser and server.</p>
+      <h3>Topics</h3>
+      <ul><li>HTML structure</li><li>CSS styling</li><li>Request and response cycle</li></ul>
+      <h3>Progress</h3><p>Early learning. Roughly 35% toward my first milestone.</p>` },
+    "skill-tools": { color: C.orange, title: "Tools & Workflow", html: `
+      <p>Keeping my work organised, versioned and easy to share.</p>
+      <h3>Topics</h3>
+      <ul><li>Git and GitHub</li><li>Technical note-taking</li><li>Project documentation</li></ul>
+      <h3>Progress</h3><p>Building the habit. Roughly 40% toward my first milestone.</p>` },
+
+    "proj-1": { color: C.orange, title: "Python Security Toolkit", html: `
+      <p><strong>Status:</strong> Planned</p>
+      <p>A collection of beginner-friendly Python scripts for safe, local learning and automation.</p>
+      <h3>Goals</h3>
+      <ul><li>Simple scripts that run only on my own machine</li><li>Clear comments explaining each step</li><li>Built to learn, not to attack</li></ul>
+      <h3>Tech</h3><p>Python · Automation</p>` },
+    "proj-2": { color: C.pink, title: "Networking Fundamentals Lab", html: `
+      <p><strong>Status:</strong> Planned</p>
+      <p>A personal lab documenting networking concepts, commands and what I observe.</p>
+      <h3>Goals</h3>
+      <ul><li>Diagram basic network topologies</li><li>Record commands like ping, traceroute and nslookup</li><li>Write up observations in plain language</li></ul>
+      <h3>Tech</h3><p>Networking · Linux</p>` },
+    "proj-3": { color: C.green, title: "Cybersecurity Learning Notes", html: `
+      <p><strong>Status:</strong> In progress</p>
+      <p>Organised notes and write-ups from beginner labs, with clear scope and ethical practice.</p>
+      <h3>Goals</h3>
+      <ul><li>One write-up per lab or topic</li><li>Always note scope and permission</li><li>Share resources that help other beginners</li></ul>
+      <h3>Tech</h3><p>Documentation · Security</p>` },
+
+    "jour-1": { color: C.pink, title: "Build the fundamentals", html: `
+      <p><strong>2026 – 2027 · Current phase</strong></p>
+      <h3>Milestones</h3>
+      <ul><li>Complete BCA coursework</li><li>Comfortable with Linux and the command line</li><li>Write Python scripts regularly</li><li>Finish beginner networking labs</li></ul>` },
+    "jour-2": { color: C.cyan, title: "Practise & specialise", html: `
+      <p><strong>2027 – 2028 · Up next</strong></p>
+      <h3>Milestones</h3>
+      <ul><li>Build at least two complete projects</li><li>Explore defensive security in depth</li><li>Study web security basics</li><li>Document everything I learn</li></ul>` },
+    "jour-3": { color: C.green, title: "Prepare for industry", html: `
+      <p><strong>2028 – 2029 · Future goal</strong></p>
+      <h3>Milestones</h3>
+      <ul><li>Strong portfolio of real projects</li><li>Relevant certifications</li><li>Internships or entry-level roles</li></ul>` }
+  };
+
+  const infoDialog = document.getElementById("info-dialog");
+  const photoDialog = document.getElementById("photo-dialog");
+
+  function openInfo(key) {
+    const d = info[key];
+    if (!d) return;
+    document.getElementById("info-head").style.setProperty("--accent", d.color);
+    document.getElementById("info-head").style.background = d.color;
+    document.getElementById("info-body").innerHTML = `<h2>${d.title}</h2>${d.html}`;
+    infoDialog.showModal();
+  }
+
+  document.querySelectorAll("[data-modal]").forEach(el => {
+    el.addEventListener("click", () => openInfo(el.dataset.modal));
+  });
+
+  const avatar = document.getElementById("avatar");
+  function openPhoto() { photoDialog.showModal(); }
+  avatar.addEventListener("click", openPhoto);
+  avatar.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") openPhoto(); });
+
+  document.querySelectorAll("[data-close]").forEach(btn => {
+    btn.addEventListener("click", () => btn.closest("dialog").close());
+  });
+
+  [infoDialog, photoDialog].forEach(dlg => {
+    dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+  });
+</script>
 </body>
 </html>
